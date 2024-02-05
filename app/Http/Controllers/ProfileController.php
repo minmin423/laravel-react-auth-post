@@ -30,8 +30,6 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {   
-        Log::info('Update Request:', ['data' => $request->all()]);
-
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
