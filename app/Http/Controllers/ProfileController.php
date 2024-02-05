@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
@@ -28,7 +29,9 @@ class ProfileController extends Controller
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
+    {   
+        Log::info('Update Request:', ['data' => $request->all()]);
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {

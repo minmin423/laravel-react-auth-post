@@ -26,12 +26,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/posts', function () {
-    return Inertia::render('Posts');
-})->middleware(['auth', 'verified'])->name('posts');
+// Route::get('/posts', function () {
+//     return Inertia::render('Posts/Index');
+// })->middleware(['auth', 'verified'])->name('posts');
+
+// Route::resource('posts', PostController::class)
+//     ->only(['index', 'store', 'update', 'destroy'])
+//     ->middleware(['auth', 'verified']);
 
 Route::resource('posts', PostController::class)
-    ->only(['index', 'store', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {

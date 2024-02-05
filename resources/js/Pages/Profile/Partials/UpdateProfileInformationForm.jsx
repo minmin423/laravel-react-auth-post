@@ -11,6 +11,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
+        description: user.description,
     });
 
     const submit = (e) => {
@@ -60,6 +61,20 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     />
 
                     <InputError className="mt-2" message={errors.email} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="description" value="description" />
+
+                    <textarea
+                        id="description"
+                        value={data.description || ''}
+                        placeholder="Description here..."
+                        className="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                        onChange={(e) => setData('description', e.target.value)}
+                    ></textarea>
+
+                    <InputError className="mt-2" message={errors.description} />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (

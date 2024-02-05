@@ -14,7 +14,8 @@ export default function Post({ post }) {
     const [editing, setEditing] = useState(false);
  
     const { data, setData, patch, clearErrors, reset, errors } = useForm({
-        message: post.message,
+        title: post.title,
+        content: post.content,
     });
  
     const submit = (e) => {
@@ -58,14 +59,18 @@ export default function Post({ post }) {
                 </div>
                 {editing
                     ? <form onSubmit={submit}>
-                        <textarea value={data.message} onChange={e => setData('message', e.target.value)} className="mt-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
+                        <input value={data.title} className="mt-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" onChange={e => setData('title', e.target.value)}></input>
+                        <textarea value={data.content} onChange={e => setData('content', e.target.value)} className="mt-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
                         <InputError message={errors.message} className="mt-2" />
                         <div className="space-x-2">
                             <PrimaryButton className="mt-4">Save</PrimaryButton>
                             <button className="mt-4" onClick={() => { setEditing(false); reset(); clearErrors(); }}>Cancel</button>
                         </div>
                     </form>
-                    : <p className="mt-4 text-lg text-gray-900">{post.message}</p>
+                    : <div>
+                        <h2 className="mt-2 text-lg font-semibold text-gray-900">{post.title}</h2>
+                        <p className="text-lg text-gray-900">{post.content}</p>
+                    </div>
                 }
             </div>
         </div>

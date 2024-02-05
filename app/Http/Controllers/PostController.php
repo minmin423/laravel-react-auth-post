@@ -34,7 +34,8 @@ class PostController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'message' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string|max:255',
         ]);
  
         $request->user()->posts()->create($validated);
@@ -66,7 +67,8 @@ class PostController extends Controller
         $this->authorize('update', $post);
  
         $validated = $request->validate([
-            'message' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string|max:255',
         ]);
  
         $post->update($validated);
