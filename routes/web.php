@@ -26,9 +26,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/posts', function () {
+    return Inertia::render('Posts');
+})->middleware(['auth', 'verified'])->name('posts');
 
 Route::resource('posts', PostController::class)
     ->only(['index', 'store', 'update', 'destroy'])
